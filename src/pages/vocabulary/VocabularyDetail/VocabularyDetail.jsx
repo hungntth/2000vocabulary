@@ -9,10 +9,11 @@ import { detail } from "../../../api/vocabularies.api"
 export default function VocabularyDetail() {
   let { vocabularySlug } = useParams();
   const [chapter, setChapter] = useState({});
-  const slugName = vocabularySlug.split("-")[1] || "Không xác định";
+  const slugs = vocabularySlug.split("-");
+  const chapterId = slugs[slugs.length - 1]
 
   const getChapter = async() => {
-    const data = await detail(slugName);
+    const data = await detail(chapterId);
     setChapter(data);
   }
 
