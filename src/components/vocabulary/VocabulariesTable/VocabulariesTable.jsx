@@ -21,11 +21,11 @@ export default function VocabulariesTable({ data = [] }) {
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.vocabulary}</td>
-              <td>{item.meaning}</td>
+              <td>{item.title}</td>
+              <td>{item.sub}</td>
               <td className="table-action">
                 <Play
-                  onClick={() => speakerAction(item.mp3)}
+                  onClick={() => speakerAction(item.sound)}
                   className="align-middle me-1"
                   size={18}
                   style={{ cursor: "pointer" }}
