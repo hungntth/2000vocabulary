@@ -1,4 +1,4 @@
-import { Category } from '../../types/vocabulary';
+import { Category } from "../../types/category";
 
 export const basicVocabulary: Category = {
   id: "basic",

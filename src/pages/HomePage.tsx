@@ -1,4 +1,3 @@
-import React from 'react';
 import VocabularyCard from '../components/VocabularyCard';
 import { categories } from '../data/vocabularyData';
 
@@ -21,7 +20,7 @@ const HomePage = () => {
               title={category.title}
               description={category.description}
               imageUrl={category.imageUrl}
-              wordCount={category.wordCount}
+              wordCount={category.words.length}
             />
           ))}
         </div>
