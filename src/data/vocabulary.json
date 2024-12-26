@@ -1,0 +1,76 @@
+{
+  "categories": [
+    {
+      "id": "basic",
+      "title": "Basic Vocabulary",
+      "description": "Essential words for everyday communication",
+      "imageUrl": "https://images.unsplash.com/photo-1477322524744-0eece9e79640",
+      "wordCount": 50,
+      "words": [
+        {
+          "word": "Accomplish",
+          "meaning": "To succeed in doing something",
+          "example": "She accomplished her goal of running a marathon."
+        },
+        {
+          "word": "Brevity",
+          "meaning": "Shortness or conciseness of expression",
+          "example": "The brevity of his speech made it more powerful."
+        },
+        {
+          "word": "Candid",
+          "meaning": "Truthful and straightforward",
+          "example": "I appreciate your candid feedback about my presentation."
+        }
+      ]
+    },
+    {
+      "id": "business",
+      "title": "Business English",
+      "description": "Professional vocabulary for the workplace",
+      "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
+      "wordCount": 30,
+      "words": [
+        {
+          "word": "Delegation",
+          "meaning": "The assignment of responsibility to others",
+          "example": "Effective delegation is key to good management."
+        },
+        {
+          "word": "Initiative",
+          "meaning": "The ability to assess and initiate things independently",
+          "example": "She showed great initiative in solving the client's problem."
+        },
+        {
+          "word": "Leverage",
+          "meaning": "Use something to maximum advantage",
+          "example": "We can leverage our network to expand the business."
+        }
+      ]
+    },
+    {
+      "id": "academic",
+      "title": "Academic Words",
+      "description": "Advanced vocabulary for academic writing",
+      "imageUrl": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+      "wordCount": 40,
+      "words": [
+        {
+          "word": "Empirical",
+          "meaning": "Based on observation or experience rather than theory",
+          "example": "The study provides empirical evidence for the hypothesis."
+        },
+        {
+          "word": "Paradigm",
+          "meaning": "A typical example or pattern of something",
+          "example": "This discovery represents a paradigm shift in our understanding."
+        },
+        {
+          "word": "Synthesis",
+          "meaning": "Combination of ideas to form a theory or system",
+          "example": "The paper presents a synthesis of various research findings."
+        }
+      ]
+    }
+  ]
+}
