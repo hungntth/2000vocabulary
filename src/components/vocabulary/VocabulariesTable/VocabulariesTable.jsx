@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Table } from "react-bootstrap";
-import { Play } from "react-feather";
+import { Volume2 } from "react-feather";
 
 export default function VocabulariesTable({ data = [] }) {
   const speakerAction = (link) => {
@@ -24,7 +24,7 @@ export default function VocabulariesTable({ data = [] }) {
               <td>{item.title}</td>
               <td>{item.sub}</td>
               <td className="table-action">
-                <Play
+                <Volume2
                   onClick={() => speakerAction(item.sound)}
                   className="align-middle me-1"
                   size={18}

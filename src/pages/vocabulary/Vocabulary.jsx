@@ -10,7 +10,6 @@ export default function Vocabulary() {
   const getListChapter = async () => {
     const data = await search();
     setChapters(data);
-    console.log(data);
   }
 
   useEffect(() => {

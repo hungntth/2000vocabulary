@@ -13,6 +13,7 @@ const HomePage = lazy(() => import("./pages/home/Home"));
 const TodoPage = lazy(() => import("./pages/todo/Todo.jsx"));
 
 //Vocabulary
+const DictionaryPage = lazy(() => import('./pages/dictionary'))
 const VocabularyPage = lazy(() => import("./pages/vocabulary"));
 const VocabularyDetailPage = lazy(() =>
   import("./pages/vocabulary/VocabularyDetail")
@@ -138,6 +139,16 @@ const routes = [
       {
         path: "",
         element: <VocabularyPage />,
+      },
+    ],
+  },
+  {
+    path: "/dictionary",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "",
+        element: <DictionaryPage />,
       },
     ],
   },

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import {
   Bell,
   BookOpen,
@@ -14,12 +13,18 @@ import {
   Users,
   Share,
 } from "react-feather";
+import { appConfig } from "../../config";
 
 const featuresSection = [
   {
     href: "/vocabularies",
     icon: BookOpen,
     title: "Vocabularies"
+  },
+  {
+    href: "/dictionary",
+    icon: BookOpen,
+    title: "dictionary"
   }
 ];
 
@@ -370,18 +375,20 @@ const navItems = [
     title: "",
     pages: featuresSection,
   },
-  {
+];
+console.log(appConfig.mode);
+if (appConfig.mode !== 'PRODUCTION') {
+  navItems.push({
     title: "Pages",
     pages: pagesSection,
   },
-  {
-    title: "Tools & Components",
-    pages: componentsSection,
-  },
-  {
-    title: "Plugins & Addons",
-    pages: pluginsSection,
-  },
-];
-
+    {
+      title: "Tools & Components",
+      pages: componentsSection,
+    },
+    {
+      title: "Plugins & Addons",
+      pages: pluginsSection,
+    },)
+}
 export default navItems;

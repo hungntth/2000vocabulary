@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
-import slugDatas from "./../../../data/vocabulary/slug";
+import { detail } from "../../../api/vocabularies.api";
 import VocabulariesTable from "../../../components/vocabulary/VocabulariesTable";
-import { detail } from "../../../api/vocabularies.api"
 
 export default function VocabularyDetail() {
   let { vocabularySlug } = useParams();
