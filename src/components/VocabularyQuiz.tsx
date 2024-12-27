@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Check } from 'lucide-react';
-import { Word } from '../types/vocabulary';
-import ScoreModal from './ScoreModal';
-import AudioButton from './AudioButton';
-import { shuffleArray } from '../utils/quiz';
+import React, { useState, useEffect } from "react";
+import { Check } from "lucide-react";
+import { Vocabulary } from "../types/vocabulary";
+import ScoreModal from "./ScoreModal";
+import AudioButton from "./AudioButton";
+import { shuffleArray } from "../utils/quiz";
 
 interface VocabularyQuizProps {
-  words: Word[];
+  words: Vocabulary[];
   onFinish: () => void;
 }
 
 const VocabularyQuiz: React.FC<VocabularyQuizProps> = ({ words, onFinish }) => {
-  const [shuffledWords, setShuffledWords] = useState<Word[]>([]);
+  const [shuffledWords, setShuffledWords] = useState<Vocabulary[]>([]);
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -21,13 +21,15 @@ const VocabularyQuiz: React.FC<VocabularyQuizProps> = ({ words, onFinish }) => {
   }, [words]);
 
   const handleInputChange = (meaning: string, value: string) => {
-    setAnswers(prev => ({ ...prev, [meaning]: value }));
+    setAnswers((prev) => ({ ...prev, [meaning]: value }));
   };
 
   const calculateScore = () => {
     let correct = 0;
-    shuffledWords.forEach(word => {
-      if (answers[word.meaning]?.toLowerCase().trim() === word.word.toLowerCase()) {
+    shuffledWords.forEach((word) => {
+      if (
+        answers[word.meaning]?.toLowerCase().trim() === word.word.toLowerCase()
+      ) {
         correct++;
       }
     });
@@ -53,14 +55,14 @@ const VocabularyQuiz: React.FC<VocabularyQuizProps> = ({ words, onFinish }) => {
             </div>
             <input
               type="text"
-              value={answers[word.meaning] || ''}
+              value={answers[word.meaning] || ""}
               onChange={(e) => handleInputChange(word.meaning, e.target.value)}
               placeholder="Type the word here..."
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
             />
           </div>
         ))}
-        
+
         <button
           onClick={handleSubmit}
           className="mt-6 w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"

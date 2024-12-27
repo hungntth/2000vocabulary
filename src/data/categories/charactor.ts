@@ -1,15 +1,17 @@
 import { Category } from "../../types/category";
+import charactorImage from "../../assets/images/categories/charactor.webp";
+import helloAudio from "../../assets/audio/charactor/hello.mp3";
 
 export const charactorVocabulary: Category = {
   id: "charactor",
   title: "Charactor",
   description: "Tính cách",
-  imageUrl: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+  imageUrl: charactorImage,
   words: [
     {
       word: "Absent-minded",
       phonetic: "/ˌæbsəntˈmaɪndɪd/",
-      audioUrl: "",
+      audioUrl: helloAudio,
       meaning: "Đãng trí",
       example:
         "He was so absent-minded that he forgot where he parked his car.",

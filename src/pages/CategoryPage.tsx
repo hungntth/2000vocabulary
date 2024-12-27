@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Book, PenTool } from "lucide-react";
-import WordList from "../components/WordList";
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import ConfirmModal from "../components/ConfirmModal";
+import LoadingSpinner from "../components/LoadingSpinner";
 import VocabularyQuiz from "../components/VocabularyQuiz";
+import WordList from "../components/WordList";
 import { getCategoryById } from "../data/vocabularyData";
 
 const CategoryPage = () => {
   const { id } = useParams<{ id: string }>();
   const category = id ? getCategoryById(id) : undefined;
   const [showQuiz, setShowQuiz] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   if (!category) {
     return (
@@ -25,6 +29,23 @@ const CategoryPage = () => {
     );
   }
 
+  const handleModeSwitch = () => {
+    if (showQuiz) {
+      setShowConfirm(true);
+    } else {
+      setIsLoading(true);
+      setTimeout(() => {
+        setShowQuiz(true);
+        setIsLoading(false);
+      }, 500);
+    }
+  };
+
+  const handleConfirm = () => {
+    setShowConfirm(false);
+    setShowQuiz(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <div className="container mx-auto px-4 py-8">
@@ -36,7 +57,7 @@ const CategoryPage = () => {
             className="mr-2 group-hover:-translate-x-1 transition-transform"
             size={20}
           />
-          Trở lại
+          Back to Categories
         </Link>
 
         <div className="mb-12 text-center">
@@ -51,19 +72,21 @@ const CategoryPage = () => {
           </p>
           <div className="mt-4 space-x-4">
             <div className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
-              Tổng {category.words.length} từ vựng
+              {category.wordCount} words in this category
             </div>
             <button
-              onClick={() => setShowQuiz(!showQuiz)}
+              onClick={handleModeSwitch}
               className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-emerald-200 transition-colors"
             >
               <PenTool className="w-4 h-4" />
-              {showQuiz ? "Danh sách từ" : "Kiểm tra"}
+              {showQuiz ? "View Word List" : "Take Quiz"}
             </button>
           </div>
         </div>
 
-        {showQuiz ? (
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : showQuiz ? (
           <VocabularyQuiz
             words={category.words}
             onFinish={() => setShowQuiz(false)}
@@ -71,6 +94,14 @@ const CategoryPage = () => {
         ) : (
           <WordList words={category.words} />
         )}
+
+        <ConfirmModal
+          isOpen={showConfirm}
+          onConfirm={handleConfirm}
+          onCancel={() => setShowConfirm(false)}
+          title="Exit Quiz?"
+          message="Are you sure you want to exit the quiz? Your progress will be lost."
+        />
       </div>
     </div>
   );
