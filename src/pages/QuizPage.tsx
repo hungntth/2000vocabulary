@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { QuizQuestion } from "../components/Quiz/QuizQuestion";
 import { QuizResults } from "../components/Quiz/QuizResults";
@@ -12,16 +12,20 @@ function QuizPage() {
 
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const questions = shuffleArray(category?.words || []).map((item, index) => ({
-    id: index,
-    word: item.word,
-    meaning: item.meaning,
-    audioUrl: item.audioUrl,
-    example: item.example
-      .replace(item.word.toLowerCase(), "_____")
-      .replace(item.word, "_____"),
-  }));
+  const questions = useMemo(() => {
+    return shuffleArray(category?.words || []).map((item, index) => ({
+      id: index,
+      word: item.word,
+      meaning: item.meaning,
+      audioUrl: item.audioUrl,
+      example: item.example
+        .replace(item.word.toLowerCase(), "_____")
+        .replace(item.word, "_____"),
+    }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category?.words, refreshKey]);
 
   const handleAnswerChange = (questionId: number, answer: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
@@ -35,6 +39,7 @@ function QuizPage() {
   const handleRetry = () => {
     setAnswers({});
     setIsSubmitted(false);
+    setRefreshKey((prev) => prev + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
