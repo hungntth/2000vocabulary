@@ -1,17 +1,13 @@
-import VocabularyCard from '../components/VocabularyCard';
-import { categories } from '../data/vocabularyData';
+import VocabularyCard from "../components/VocabularyCard";
+import { categories } from "../data/vocabularyData";
+import { Header } from "../layout/Header";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-center mb-4 text-gray-900">
-          English Vocabulary Builder
-        </h1>
-        <p className="text-center text-gray-600 mb-12 text-lg">
-          Expand your English vocabulary with our curated word lists
-        </p>
-        
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <Header />
+
+      <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category) => (
             <VocabularyCard
@@ -24,7 +20,7 @@ const HomePage = () => {
             />
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 };

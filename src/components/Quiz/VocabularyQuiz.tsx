@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Check } from "lucide-react";
-import { Vocabulary } from "../types/vocabulary";
-import ScoreModal from "./ScoreModal";
-import AudioButton from "./AudioButton";
-import { shuffleArray } from "../utils/quiz";
+import { Vocabulary } from "../../types/vocabulary";
+import ScoreModal from "../ScoreModal";
+import AudioButton from "../AudioButton";
+import { shuffleArray } from "../../utils/quiz";
 
 interface VocabularyQuizProps {
   words: Vocabulary[];
