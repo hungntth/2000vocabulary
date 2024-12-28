@@ -1,4 +1,3 @@
-// Utility functions for quiz functionality
 export const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {

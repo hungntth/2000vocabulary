@@ -1,16 +1,32 @@
 import { PenTool } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ConfirmModal from "../components/ConfirmModal";
-import WordList from "../components/WordList";
+import WordList from "../components/Category/WordList";
 import { getCategoryById } from "../data/vocabularyData";
 import { Header } from "../layout/Header";
 import NotFoundPage from "./NotFoundPage";
+import SearchBar from "../components/SearchBar";
+import { removeDiacritics } from "../utils/filter";
 
 const CategoryPage = () => {
   const { id } = useParams<{ id: string }>();
   const category = id ? getCategoryById(id) : undefined;
   const [showConfirm, setShowConfirm] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredWords = useMemo(() => {
+    if (!searchQuery.trim()) return category?.words || [];
+
+    const query = searchQuery.toLowerCase().trim();
+    return category?.words.filter(
+      (category) =>
+        category.word.toLowerCase().includes(query) ||
+        removeDiacritics(category.meaning.toLowerCase()).includes(
+          removeDiacritics(query)
+        )
+    );
+  }, [searchQuery]);
 
   const handleConfirm = () => {
     setShowConfirm(false);
@@ -42,7 +58,11 @@ const CategoryPage = () => {
           </div>
         </div>
 
-        <WordList words={category.words} />
+        <div className="flex justify-center mb-8 mx-4">
+          <SearchBar value={searchQuery} onChange={setSearchQuery} />
+        </div>
+
+        <WordList words={filteredWords || []} />
 
         <ConfirmModal
           isOpen={showConfirm}

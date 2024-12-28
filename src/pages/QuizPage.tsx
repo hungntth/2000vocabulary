@@ -5,6 +5,7 @@ import { QuizResults } from "../components/Quiz/QuizResults";
 import { getCategoryById } from "../data/vocabularyData";
 import { Header } from "../layout/Header";
 import { shuffleArray } from "../utils/quiz";
+import ScrollButtons from "../components/ScrollButtons";
 
 function QuizPage() {
   const { id } = useParams<{ id: string }>();
@@ -24,7 +25,7 @@ function QuizPage() {
         .replace(item.word.toLowerCase(), "_____")
         .replace(item.word, "_____"),
     }));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category?.words, refreshKey]);
 
   const handleAnswerChange = (questionId: number, answer: string) => {
@@ -60,6 +61,8 @@ function QuizPage() {
         backUrl={`/category/${id}`}
         hasModal={true}
       />
+
+      <ScrollButtons />
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         {isSubmitted && (

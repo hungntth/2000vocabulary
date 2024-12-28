@@ -1,4 +1,3 @@
-// Global audio state manager
 class AudioManager {
   private static instance: AudioManager;
   private currentAudio: HTMLAudioElement | null = null;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BookOpen, Lightbulb } from "lucide-react";
-import AudioButton from "./AudioButton";
+import AudioButton from "../AudioButton";
+import ScrollButtons from "../ScrollButtons";
 
 interface Word {
   word: string;
@@ -23,6 +24,7 @@ const WordList: React.FC<WordListProps> = ({ words }) => {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4">
+      <ScrollButtons />
       {words.map((word, index) => (
         <div
           key={index}
