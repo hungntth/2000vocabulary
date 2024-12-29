@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 interface VocabularyCardProps {
   id: string;
@@ -17,15 +17,18 @@ const VocabularyCard: React.FC<VocabularyCardProps> = ({
   wordCount,
 }) => {
   return (
-    <Link 
+    <Link
       to={`/category/${id}`}
       className="block bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105"
     >
-      <img
-        src={imageUrl}
-        alt={title}
-        className="w-full h-48 object-cover"
-      />
+      <div className="aspect-square relative overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-2 text-gray-800">{title}</h2>
         <p className="text-gray-600 mb-4">{description}</p>

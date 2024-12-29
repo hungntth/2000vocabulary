@@ -7,6 +7,11 @@ import { appearanceVocabulary } from "./categories/appearance";
 import { bodyMovementVocabulary } from "./categories/bodyMovement";
 import { feelingsAndEmotionsVocabulary } from "./categories/feelingsAndEmotions";
 import { healthAndDiseasesVocabulary } from "./categories/healthAndDiseases";
+import { marriageVocabulary } from "./categories/marriage";
+import { familyVocabulary } from "./categories/family";
+import { jobsVocabulary } from "./categories/jobs";
+import { educationVocabulary } from "./categories/education";
+import { subjectsAndSchoolObjectsVocabulary } from "./categories/subjectsAndSchoolObjects";
 
 export const categories: Category[] = [
   charactorVocabulary,
@@ -17,6 +22,11 @@ export const categories: Category[] = [
   bodyMovementVocabulary,
   feelingsAndEmotionsVocabulary,
   healthAndDiseasesVocabulary,
+  marriageVocabulary,
+  familyVocabulary,
+  jobsVocabulary,
+  educationVocabulary,
+  subjectsAndSchoolObjectsVocabulary,
 ];
 
 export const getCategoryById = (id: string): Category | undefined => {
