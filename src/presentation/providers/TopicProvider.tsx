@@ -1,8 +1,7 @@
 import { createContext, ReactNode, useContext } from "react";
-import { GetTopicsUseCaseImpl } from "../../application/usecase/GetTopicsUseCase";
 import { GetTopicByIdUseCaseImpl } from "../../application/usecase/GetTopicByIdUseCase";
+import { GetTopicsUseCaseImpl } from "../../application/usecase/GetTopicsUseCase";
 import { ApiTopicRepository } from "../../infrastructure/ApiTopicRepository";
-import { Header } from "../layout/Header";
 
 // Define the context type
 interface TopicContextType {

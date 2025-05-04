@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { QuizQuestion } from "../components/Quiz/QuizQuestion";
 import { QuizResults } from "../components/Quiz/QuizResults";
@@ -6,25 +6,40 @@ import { getCategoryById } from "../../data/vocabularyData";
 import { Header } from "../layout/Header";
 import { shuffleArray } from "../../application/utils/quiz";
 import ScrollButtons from "../components/ScrollButtons";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../application/store/store";
+import { fetchTopicById } from "../../application/store/topicsSlice";
+import LoadingPage from "./LoadingPage";
 
 function QuizPage() {
   const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch<AppDispatch>();
   const category = id ? getCategoryById(id) : undefined;
+
+  const { selectedTopic, status, error } = useSelector(
+    (state: RootState) => state.topics
+  );
+
+  useEffect(() => {
+    dispatch(fetchTopicById(id || ""));
+  }, [dispatch, id]);
 
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
 
   const questions = useMemo(() => {
-    return shuffleArray(category?.words || []).map((item, index) => ({
-      id: index,
-      word: item.word,
-      meaning: item.meaning,
-      audioUrl: item.audioUrl,
-      example: item.example
-        .replace(item.word.toLowerCase(), "_____")
-        .replace(item.word, "_____"),
-    }));
+    return shuffleArray(selectedTopic?.vocabularies || []).map(
+      (item, index) => ({
+        id: index,
+        word: item.word,
+        meaning: item.meaning,
+        audioUrl: item.mp3,
+        example: item.example
+          .replace(item.word.toLowerCase(), "_____")
+          .replace(item.word, "_____"),
+      })
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category?.words, refreshKey]);
 
@@ -51,6 +66,9 @@ function QuizPage() {
       return score + (isCorrect ? 1 : 0);
     }, 0);
   };
+
+  if (status === "loading") return <LoadingPage />;
+  if (status === "failed") return <div>{error}</div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-12">

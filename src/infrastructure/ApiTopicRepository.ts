@@ -23,11 +23,13 @@ export class ApiTopicRepository implements TopicRepository {
 
   async getTopicById(id: string): Promise<Topic> {
     try {
-      const response = await fetch(`${API_URL}/topics/${id}`);
-      if (!response.ok) {
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/topic/${id}`
+      );
+      if (response.status < 200 || response.status >= 300) {
         throw new Error("Topic not found");
       }
-      return response.json();
+      return response.data.data; // Assuming `data` contains the topic object
     } catch (error) {
       throw new Error(error instanceof Error ? error.message : "Network error");
     }

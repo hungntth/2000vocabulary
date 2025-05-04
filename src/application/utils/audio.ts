@@ -1,47 +1,27 @@
 class AudioManager {
-  private static instance: AudioManager;
-  private currentAudio: HTMLAudioElement | null = null;
-  private isPlaying: boolean = false;
+  private audio: HTMLAudioElement | null = null;
 
-  private constructor() {}
-
-  public static getInstance(): AudioManager {
-    if (!AudioManager.instance) {
-      AudioManager.instance = new AudioManager();
-    }
-    return AudioManager.instance;
-  }
-
-  public play(
-    audioUrl: string,
-    onPlayingChange: (playing: boolean) => void
-  ): void {
-    if (this.isPlaying) {
-      return;
+  play(audioUrl: string) {
+    // Dừng audio hiện tại nếu đang phát
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.currentTime = 0; // Reset thời gian phát
     }
 
-    if (this.currentAudio) {
-      this.currentAudio.pause();
-      this.currentAudio.currentTime = 0;
-    }
+    // Tạo audio mới
+    this.audio = new Audio(audioUrl);
 
-    this.currentAudio = new Audio(audioUrl);
-    this.isPlaying = true;
-    onPlayingChange(true);
-
-    this.currentAudio.onended = () => {
-      this.isPlaying = false;
-      onPlayingChange(false);
-      this.currentAudio = null;
-    };
-
-    this.currentAudio.play().catch((error) => {
-      console.error("Error playing audio:", error);
-      this.isPlaying = false;
-      onPlayingChange(false);
-      this.currentAudio = null;
-    });
+    // Phát audio
+    this.audio
+      .play()
+      .then(() => {
+        console.log("Audio is playing");
+      })
+      .catch((error) => {
+        console.error("Error playing audio:", error);
+        this.audio = null; // Reset audio instance
+      });
   }
 }
 
-export const audioManager = AudioManager.getInstance();
+export const audioManager = new AudioManager();

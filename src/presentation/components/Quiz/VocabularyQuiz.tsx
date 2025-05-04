@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Check } from "lucide-react";
 import ScoreModal from "../ScoreModal";
 import AudioButton from "../AudioButton";
-import { Vocabulary } from "../../../types/vocabulary";
 import { shuffleArray } from "../../../application/utils/quiz";
+import { Vocabulary } from "../../../domain/entities/vocabulary.entity";
 
 interface VocabularyQuizProps {
   words: Vocabulary[];
@@ -51,7 +51,7 @@ const VocabularyQuiz: React.FC<VocabularyQuizProps> = ({ words, onFinish }) => {
               <p className="text-lg font-medium text-gray-700 flex-1">
                 {index + 1}. {word.meaning}
               </p>
-              <AudioButton audioUrl={word.audioUrl} />
+              <AudioButton audioUrl={word.mp3} />
             </div>
             <input
               type="text"

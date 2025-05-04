@@ -1,3 +1,5 @@
+import { Vocabulary } from "./vocabulary.entity";
+
 export interface Topic {
   id: string;
   name: string;
@@ -6,4 +8,5 @@ export interface Topic {
   numContents: number;
   no: number;
   created_at: string;
+  vocabularies: Vocabulary[];
 }

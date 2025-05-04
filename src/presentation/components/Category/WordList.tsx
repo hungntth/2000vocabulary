@@ -2,17 +2,10 @@ import React, { useState } from "react";
 import { BookOpen, Lightbulb } from "lucide-react";
 import AudioButton from "../AudioButton";
 import ScrollButtons from "../ScrollButtons";
-
-interface Word {
-  word: string;
-  phonetic: string;
-  audioUrl: string;
-  meaning: string;
-  example: string;
-}
+import { Vocabulary } from "../../../domain/entities/vocabulary.entity";
 
 interface WordListProps {
-  words: Word[];
+  words: Vocabulary[];
 }
 
 const WordList: React.FC<WordListProps> = ({ words }) => {
@@ -39,9 +32,9 @@ const WordList: React.FC<WordListProps> = ({ words }) => {
                   {word.word}
                 </h3>
                 <span className="text-gray-500 italic text-sm md:text-base">
-                  {word.phonetic}
+                  {word.spelling}
                 </span>
-                <AudioButton audioUrl={word.audioUrl} />
+                <AudioButton audioUrl={word.mp3} />
               </div>
             </div>
 
