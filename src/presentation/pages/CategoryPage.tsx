@@ -3,11 +3,11 @@ import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ConfirmModal from "../components/ConfirmModal";
 import WordList from "../components/Category/WordList";
-import { getCategoryById } from "../data/vocabularyData";
+import { getCategoryById } from "../../data/vocabularyData";
 import { Header } from "../layout/Header";
 import NotFoundPage from "./NotFoundPage";
 import SearchBar from "../components/SearchBar";
-import { removeDiacritics } from "../utils/filter";
+import { removeDiacritics } from "../../application/utils/filter";
 
 const CategoryPage = () => {
   const { id } = useParams<{ id: string }>();

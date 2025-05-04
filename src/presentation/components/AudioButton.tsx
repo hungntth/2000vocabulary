@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Volume2 } from "lucide-react";
-import { audioManager } from "../utils/audio";
+import { audioManager } from "../../application/utils/audio";
 
 interface AudioButtonProps {
   audioUrl: string;

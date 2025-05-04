@@ -2,9 +2,9 @@ import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { QuizQuestion } from "../components/Quiz/QuizQuestion";
 import { QuizResults } from "../components/Quiz/QuizResults";
-import { getCategoryById } from "../data/vocabularyData";
+import { getCategoryById } from "../../data/vocabularyData";
 import { Header } from "../layout/Header";
-import { shuffleArray } from "../utils/quiz";
+import { shuffleArray } from "../../application/utils/quiz";
 import ScrollButtons from "../components/ScrollButtons";
 
 function QuizPage() {
