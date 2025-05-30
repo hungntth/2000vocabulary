@@ -56,7 +56,7 @@ const topicsSlice = createSlice({
       })
       .addCase(fetchTopicById.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.selectedTopic = action.payload as Topic; // Set the selected topic
+        state.selectedTopic = action.payload as any; // Set the selected topic
       })
       .addCase(fetchTopicById.rejected, (state, action) => {
         state.status = "failed";

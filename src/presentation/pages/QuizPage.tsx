@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { QuizQuestion } from "../components/Quiz/QuizQuestion";
 import { QuizResults } from "../components/Quiz/QuizResults";
-import { getCategoryById } from "../../data/vocabularyData";
 import { Header } from "../layout/Header";
 import { shuffleArray } from "../../application/utils/quiz";
 import ScrollButtons from "../components/ScrollButtons";
@@ -14,14 +13,13 @@ import LoadingPage from "./LoadingPage";
 function QuizPage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const category = id ? getCategoryById(id) : undefined;
 
   const { selectedTopic, status, error } = useSelector(
     (state: RootState) => state.topics
   );
 
   useEffect(() => {
-    dispatch(fetchTopicById(id || ""));
+    if (id) dispatch(fetchTopicById(id));
   }, [dispatch, id]);
 
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -40,8 +38,7 @@ function QuizPage() {
           .replace(item.word, "_____"),
       })
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category?.words, refreshKey]);
+  }, [selectedTopic?.vocabularies, refreshKey]);
 
   const handleAnswerChange = (questionId: number, answer: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
@@ -73,8 +70,12 @@ function QuizPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-12">
       <Header
-        title={`${category?.title} Quiz`}
-        subtitle={`Test your knowledge of ${category?.title.toLowerCase()} vocabulary`}
+        title={`${selectedTopic?.title || ""} Quiz`}
+        subtitle={
+          selectedTopic
+            ? `Test your knowledge of ${selectedTopic?.title?.toLowerCase()} vocabulary`
+            : ""
+        }
         showBack
         backUrl={`/category/${id}`}
         hasModal={true}

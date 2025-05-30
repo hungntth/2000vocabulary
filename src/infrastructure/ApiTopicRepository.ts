@@ -3,13 +3,14 @@ import { TopicResponse } from "../domain/ports/payload/response/topic.response-p
 import { TopicRepository } from "../domain/repositories/TopicRepository";
 import { Topic } from "../domain/entities/topic.entity";
 
-const API_URL = "https://api.example.com"; // Replace with your actual API URL
+// const API_URL = "http://localhost:3000"; // Replace with your actual API URL
+const API_URL = ""; // Replace with your actual API URL
 
 export class ApiTopicRepository implements TopicRepository {
   async getTopics(): Promise<Topic[]> {
     try {
       const response = await axios.get<TopicResponse>(
-        "http://localhost:3000/api/v1/topic"
+        `${API_URL}/api/v1/topic`
       );
 
       if (response.status < 200 || response.status >= 300) {
@@ -24,7 +25,7 @@ export class ApiTopicRepository implements TopicRepository {
   async getTopicById(id: string): Promise<Topic> {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/v1/topic/${id}`
+        `${API_URL}/api/v1/topic/${id}`
       );
       if (response.status < 200 || response.status >= 300) {
         throw new Error("Topic not found");

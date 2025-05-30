@@ -23,7 +23,7 @@ const VocabularyCard: React.FC<VocabularyCardProps> = ({
     >
       <div className="aspect-square relative overflow-hidden">
         <img
-          src={`http://localhost:3000/uploads/${imageUrl}`}
+          src={`/uploads/${imageUrl}`}
           alt={title}
           className="absolute inset-0 w-full h-full object-cover"
           loading="lazy"
